@@ -1,0 +1,2 @@
+#!/bin/bash
+export PEER=True && python -m be.flask_app

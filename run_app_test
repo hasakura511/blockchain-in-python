@@ -1,0 +1,2 @@
+#!/bin/bash
+python -m be.scripts.test_app
