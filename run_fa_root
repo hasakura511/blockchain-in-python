@@ -1,2 +1,2 @@
 #!/bin/bash
-python main.py
+export SEED_DATA=True && python main.py

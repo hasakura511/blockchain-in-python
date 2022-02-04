@@ -22,6 +22,27 @@ def get_blockchain():
     return bc_json
 
 
+@router.get("/range", response_model=List[Block])
+def get_blockchain_range(start: int, end: int | None = None):
+    # print(start, end)
+    try:
+        bc_json = db_get_blockchain()
+    except Exception as e:
+        # print(e)
+        raise HTTPExceptions.unprocessable(str(e))
+    return bc_json[::-1][start:end]
+
+
+@router.get("/length", response_model=int)
+def get_blockchain_length():
+    try:
+        bc_length = len(db_get_blockchain())
+    except Exception as e:
+        # print(e)
+        raise HTTPExceptions.unprocessable(str(e))
+    return bc_length
+
+
 @router.get("/mine", response_model=Block)
 def get_mined_block():
     try:

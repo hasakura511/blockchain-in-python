@@ -13,3 +13,4 @@ websockets
 pydantic
 passlib
 bcrypt
+python-dotenv

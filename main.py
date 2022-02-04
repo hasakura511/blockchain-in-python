@@ -66,11 +66,19 @@ def index():
     return "Flask Blockchain Index"
 
 
-PORT = ROOT_PORT
-if os.environ.get("PEER"):
-    print("PEER MODE")
-    PORT = initialize_peer()
-
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=PORT, log_level="info", reload=False)
+    # this needs to be in main or uvicorn will run twice
+    PORT = ROOT_PORT
+    if os.environ.get("PEER"):
+        print("PEER MODE")
+        PORT = initialize_peer()
 
+    if os.environ.get("SEED_DATA"):
+        from be.db.db_bc import seed_data
+
+        print("SEEDING DATA")
+        seed_data()
+
+    uvicorn.run(
+        "main:app", host="0.0.0.0", port=PORT, log_level="info", reload=False
+    )

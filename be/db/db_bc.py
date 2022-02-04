@@ -62,3 +62,19 @@ def db_post_wallet_transaction(transaction_base):
 
     pubsub.broadcast_transaction(tx_json)
     return tx_json
+
+
+def seed_data():
+    import random
+
+    for i in range(10):
+        blockchain.add_block(
+            [
+                Transaction(
+                    Wallet(), Wallet().address, random.randint(1, 50)
+                ).to_json(),
+                Transaction(
+                    Wallet(), Wallet().address, random.randint(1, 50)
+                ).to_json(),
+            ]
+        )

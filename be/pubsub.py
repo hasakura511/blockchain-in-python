@@ -14,6 +14,7 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 pnconfig = PNConfiguration()
 pnconfig.subscribe_key = os.environ["PN_SUBSCRIBE_KEY"]
 pnconfig.publish_key = os.environ["PN_PUBLISH_KEY"]
+pnconfig.uuid = os.environ["PN_UUID"]
 
 # pubsub channels
 CHANNELS = {"TEST": "TEST", "BLOCK": "BLOCK", "TRANSACTION": "TRANSACTION"}
