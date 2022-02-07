@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { API_BASE_URL } from "../config";
 import Block from "./Block";
 
@@ -54,6 +55,8 @@ function Blockchain() {
 
   return (
     <div className="Blockchain">
+      <Link to="/">Home</Link>
+      <hr />
       <h3>Blockchain</h3>
       <div className="">{blockchain_html}</div>
       <div className="">{page_buttons}</div>

@@ -47,8 +47,27 @@ def get_blockchain_length():
 def get_mined_block():
     try:
         block_json = db_get_mined_block()
-        print(block_json)
+        # print(block_json)
     except Exception as e:
         # print(e)
         raise HTTPExceptions.unprocessable(str(e))
     return block_json
+
+
+@router.get("/known-addresses", response_model=List[str])
+def get_known_addresses():
+    known_addresses = set()
+    bc = db_get_blockchain()
+    # print(bc)
+    for b in bc:
+        for tx in b["data"]:
+            known_addresses.update(tx["output"].keys())
+
+    return known_addresses
+
+
+@router.get("/transactions", response_model=List[dict])
+def get_transactions():
+    transactions = transaction_pool.transaction_data()
+    # print(transactions)
+    return transactions

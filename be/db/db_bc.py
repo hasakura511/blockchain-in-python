@@ -1,4 +1,4 @@
-import os, requests
+import os, requests, random
 from be.blockchain.blockchain import Blockchain
 from be.pubsub import PubSub
 from be.config import ROOT_PORT
@@ -65,8 +65,8 @@ def db_post_wallet_transaction(transaction_base):
 
 
 def seed_data():
-    import random
 
+    print("SEEDING DATA")
     for i in range(10):
         blockchain.add_block(
             [
@@ -77,4 +77,12 @@ def seed_data():
                     Wallet(), Wallet().address, random.randint(1, 50)
                 ).to_json(),
             ]
+        )
+
+
+def seed_transaction_pool():
+    print("SEEDING TRANSACTION POOL")
+    for i in range(3):
+        transaction_pool.set_transaction(
+            Transaction(Wallet(), Wallet().address, random.randint(1, 50))
         )

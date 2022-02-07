@@ -63,7 +63,7 @@ async def add_middleware(request: Request, call_next):
 
 @app.get("/")
 def index():
-    return "Flask Blockchain Index"
+    return "FastAPI Blockchain Index"
 
 
 if __name__ == "__main__":
@@ -74,10 +74,10 @@ if __name__ == "__main__":
         PORT = initialize_peer()
 
     if os.environ.get("SEED_DATA"):
-        from be.db.db_bc import seed_data
+        from be.db.db_bc import seed_data, seed_transaction_pool
 
-        print("SEEDING DATA")
         seed_data()
+        seed_transaction_pool()
 
     uvicorn.run(
         "main:app", host="0.0.0.0", port=PORT, log_level="info", reload=False
